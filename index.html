@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation AI Advisory — Business First. AI Applied.</title>
+<meta name="description" content="Foundation AI Advisory helps mid-market companies build AI capabilities on solid operational ground. Enterprise AI Evaluation, 90-Day Sprints, zero hype.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1b2d52;
+  --navy-deep: #0f1e3a;
+  --blue: #2a7de1;
+  --blue-light: #3a8ff0;
+  --sky: #6ec6f5;
+  --white: #ffffff;
+  --off-white: #f7f9fc;
+  --text-dark: #0f1e3a;
+  --text-mid: #3a4d6b;
+  --text-muted: #6b7e9f;
+  --border: #dce6f5;
+  --section-pad: clamp(64px, 8vw, 96px);
+  --h-pad: 6%;
+  --max-w: 1100px;
+  --radius: 13px;
+  --radius-sm: 10px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.65;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ─── UTILITIES ─── */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--h-pad); width: 100%; }
+.section { padding: var(--section-pad) 0; }
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 var(--h-pad);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  transition: box-shadow 0.3s ease;
+}
+.nav.scrolled {
+  box-shadow: 0 1px 12px rgba(15,30,58,0.08);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo svg { flex-shrink: 0; }
+.nav-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.nav-wordmark-top {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--navy-deep);
+}
+.nav-wordmark-bottom {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--blue);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 36px);
+}
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-mid);
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--blue); }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--navy-deep);
+  color: var(--white);
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 8px;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s, box-shadow 0.25s, background 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(15,30,58,0.18);
+  background: #162847;
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: transparent;
+  color: var(--navy-deep);
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  letter-spacing: 0.01em;
+  transition: transform 0.2s, border-color 0.25s, box-shadow 0.25s;
+}
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  border-color: var(--blue);
+  box-shadow: 0 4px 16px rgba(42,125,225,0.10);
+}
+
+.btn-blue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s, box-shadow 0.25s, background 0.2s;
+}
+.btn-blue:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(42,125,225,0.22);
+  background: #2472d0;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 0 80px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 25% 20%, rgba(42,125,225,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 70%, rgba(110,198,245,0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(27,45,82,0.03) 0%, transparent 50%);
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(220,230,245,0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220,230,245,0.35) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 var(--h-pad);
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-mid);
+  letter-spacing: 0.02em;
+  margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.hero h1 {
+  font-size: clamp(38px, 6vw, 62px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: var(--navy-deep);
+  margin-bottom: 20px;
+}
+.hero h1 span { color: var(--blue); }
+.hero-sub {
+  font-size: clamp(16px, 2vw, 19px);
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto 36px;
+}
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Entry Point Card */
+.entry-card {
+  max-width: 560px;
+  margin: 0 auto 48px;
+  padding: 28px 32px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  text-align: left;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.entry-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 24px rgba(42,125,225,0.08);
+}
+.entry-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.entry-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy-deep);
+  margin-bottom: 6px;
+}
+.entry-card p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* Metrics Strip */
+.metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.metric {
+  background: var(--white);
+  padding: 20px 16px;
+  text-align: center;
+}
+.metric-value {
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 800;
+  color: var(--navy-deep);
+  letter-spacing: -0.01em;
+  margin-bottom: 3px;
+}
+.metric-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+/* ─── AI EVALUATION ─── */
+.eval-section { background: var(--off-white); }
+.eval-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.eval-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.eval-left h2 {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: var(--navy-deep);
+  margin-bottom: 18px;
+}
+.eval-left p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.eval-left .btn-blue { margin-top: 10px; }
+.eval-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.eval-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.3s;
+}
+.eval-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--blue);
+  box-shadow: 0 8px 24px rgba(42,125,225,0.08);
+}
+.eval-card-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--off-white);
+  border-radius: 9px;
+  margin-bottom: 14px;
+}
+.eval-card-icon svg { width: 20px; height: 20px; stroke: var(--blue); }
+.eval-card h4 {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--navy-deep);
+  margin-bottom: 6px;
+}
+.eval-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ─── METHODOLOGY ─── */
+.method-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.method-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.method-header h2 {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: var(--navy-deep);
+  margin-bottom: 14px;
+}
+.method-header p {
+  font-size: 15.5px;
+  color: var(--text-mid);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.pillar {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.3s;
+}
+.pillar:hover {
+  transform: translateY(-3px);
+  border-color: var(--blue);
+  box-shadow: 0 8px 24px rgba(42,125,225,0.08);
+}
+.pillar-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--off-white);
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+.pillar-icon svg { width: 22px; height: 22px; stroke: var(--blue); }
+.pillar-step {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.pillar h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy-deep);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.pillar p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* Flagship Card */
+.flagship {
+  background: var(--navy-deep);
+  border-radius: var(--radius);
+  padding: clamp(36px, 5vw, 52px);
+  color: var(--white);
+}
+.flagship-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 14px;
+}
+.flagship h3 {
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.flagship > p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+.flagship-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.flagship-item {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 22px;
+  backdrop-filter: blur(4px);
+  transition: background 0.25s, border-color 0.25s;
+}
+.flagship-item:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(110,198,245,0.3);
+}
+.flagship-item h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.flagship-item p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+
+/* ─── WHO WE SERVE ─── */
+.serve-section { background: var(--off-white); }
+.serve-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.serve-header h2 {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: var(--navy-deep);
+  margin-bottom: 14px;
+}
+.serve-header p {
+  font-size: 15.5px;
+  color: var(--text-mid);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.serve-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.serve-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px 24px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.3s;
+}
+.serve-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--blue);
+  box-shadow: 0 8px 24px rgba(42,125,225,0.08);
+}
+.serve-card-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--off-white);
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+.serve-card-icon svg { width: 22px; height: 22px; stroke: var(--blue); }
+.serve-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy-deep);
+  margin-bottom: 8px;
+}
+.serve-card p {
+  font-size: 13.5px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* ─── PHILOSOPHY ─── */
+.philosophy {
+  background: var(--navy-deep);
+  color: var(--white);
+}
+.phil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.phil-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 16px;
+}
+.phil-left h2 {
+  font-size: clamp(26px, 3.5vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+.phil-quote {
+  border-left: 3px solid var(--sky);
+  padding-left: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+}
+.phil-left p {
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.phil-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.phil-stat {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 24px 28px;
+  backdrop-filter: blur(4px);
+  transition: background 0.25s, border-color 0.25s;
+}
+.phil-stat:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(110,198,245,0.3);
+}
+.phil-stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--sky);
+  margin-bottom: 4px;
+}
+.phil-stat-label {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+/* ─── CONTACT ─── */
+.contact-section { background: var(--off-white); }
+.contact-inner {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+.contact-inner h2 {
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--navy-deep);
+  margin-bottom: 12px;
+}
+.contact-inner > p {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin-bottom: 36px;
+}
+.contact-form {
+  text-align: left;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.form-group { margin-bottom: 14px; }
+.form-group label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(42,125,225,0.10);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-submit {
+  text-align: center;
+  margin-top: 8px;
+}
+.contact-note {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+.contact-note a {
+  color: var(--blue);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.footer-wordmark-top {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--navy-deep);
+}
+.footer-wordmark-bottom {
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--blue);
+}
+.footer-tagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-mid);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.footer-link:hover { color: var(--blue); }
+.footer-link svg { width: 16px; height: 16px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .eval-grid { grid-template-columns: 1fr; gap: 40px; }
+  .pillars { grid-template-columns: 1fr 1fr; }
+  .serve-grid { grid-template-columns: 1fr 1fr; }
+  .phil-grid { grid-template-columns: 1fr; gap: 40px; }
+  .flagship-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .metrics-strip { grid-template-columns: 1fr 1fr; }
+  .pillars { grid-template-columns: 1fr; }
+  .serve-grid { grid-template-columns: 1fr; }
+  .flagship-grid { grid-template-columns: 1fr; }
+  .eval-cards { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links-text { display: none; }
+  .hero h1 { font-size: clamp(32px, 8vw, 42px); }
+  .entry-card { padding: 22px 20px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-tagline { order: 3; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="navBarGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+          <linearGradient id="navOrbitGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1b2d52"/><stop offset="50%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+          <clipPath id="navBrainClip"><ellipse cx="50" cy="44" rx="30" ry="28"/></clipPath>
+        </defs>
+        <!-- Brain outline left half -->
+        <path d="M50 16 C38 16 28 20 22 28 C16 36 15 46 18 54 C20 60 24 65 30 68 C34 70 40 72 46 72 L50 72 L50 16Z" fill="#0f1e3a" opacity="0.92"/>
+        <!-- Cloud + bars right half -->
+        <path d="M50 16 C62 16 72 20 78 28 C84 36 85 44 83 52 C86 52 90 56 90 61 C90 66 86 70 81 70 L50 70 L50 16Z" fill="#2a7de1" opacity="0.15"/>
+        <path d="M58 66 C54 68 50 68 50 68 L50 26 C58 18 68 20 74 26 C80 32 82 42 80 50 C84 51 87 55 87 59 C87 64 83 67 79 67 L58 66Z" fill="url(#navBarGrad)" opacity="0.18"/>
+        <!-- Neural network nodes (left) -->
+        <circle cx="36" cy="30" r="3.5" fill="#6ec6f5"/>
+        <circle cx="28" cy="40" r="3" fill="#6ec6f5"/>
+        <circle cx="38" cy="48" r="3.2" fill="#6ec6f5"/>
+        <circle cx="30" cy="56" r="2.8" fill="#6ec6f5"/>
+        <circle cx="44" cy="36" r="2.5" fill="#6ec6f5"/>
+        <circle cx="42" cy="58" r="2.6" fill="#6ec6f5"/>
+        <circle cx="34" cy="66" r="2.4" fill="#6ec6f5"/>
+        <!-- Neural connections -->
+        <line x1="36" y1="30" x2="28" y2="40" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="36" y1="30" x2="44" y2="36" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="28" y1="40" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="44" y1="36" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="38" y1="48" x2="30" y2="56" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="38" y1="48" x2="42" y2="58" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="30" y1="56" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="42" y1="58" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+        <line x1="28" y1="40" x2="30" y2="56" stroke="#6ec6f5" stroke-width="1" opacity="0.35"/>
+        <!-- Bar chart (right) -->
+        <rect x="56" y="52" width="5" height="16" rx="1.2" fill="url(#navBarGrad)" opacity="0.65"/>
+        <rect x="63" y="44" width="5" height="24" rx="1.2" fill="url(#navBarGrad)" opacity="0.78"/>
+        <rect x="70" y="36" width="5" height="32" rx="1.2" fill="url(#navBarGrad)" opacity="0.9"/>
+        <rect x="77" y="28" width="5" height="40" rx="1.2" fill="url(#navBarGrad)"/>
+        <!-- Orbit ring -->
+        <ellipse cx="50" cy="52" rx="46" ry="16" stroke="url(#navOrbitGrad)" stroke-width="2.8" fill="none" transform="rotate(-8 50 52)"/>
+        <!-- Circuit dots on orbit -->
+        <circle cx="8" cy="58" r="2.5" fill="#0f1e3a"/>
+        <circle cx="18" cy="65" r="2" fill="#1b2d52"/>
+        <circle cx="30" cy="68" r="2.2" fill="#2a7de1"/>
+        <circle cx="70" cy="68" r="2.2" fill="#2a7de1"/>
+        <circle cx="82" cy="65" r="2" fill="#1b2d52"/>
+        <circle cx="92" cy="58" r="2.5" fill="#0f1e3a"/>
+      </svg>
+      <div class="nav-wordmark">
+        <span class="nav-wordmark-top">FOUNDATION</span>
+        <span class="nav-wordmark-bottom">&mdash; AI ADVISORY &mdash;</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#methodology" class="nav-link nav-links-text">Methodology</a>
+      <a href="#evaluation" class="nav-link nav-links-text">AI Evaluation</a>
+      <a href="#serve" class="nav-link nav-links-text">Who We Serve</a>
+      <a href="mailto:blueprint@foundationaiadvisory.com?subject=Booking%20a%20Call%20with%20FAA&body=Hi%20FAA%20team%2C%0A%0AI%27d%20like%20to%20schedule%20a%20discovery%20call.%0A%0ACompany%3A%20%0ARole%3A%20%0ABrief%20context%3A%20" class="btn-primary">Book a Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">
+      <span class="hero-badge-dot"></span>
+      AI Advisory for Mid-Market Operators
+    </div>
+    <h1 class="fade-up">Business First.<br><span>AI Applied.</span></h1>
+    <p class="hero-sub fade-up">We help mid-market companies cut through the noise and build AI capabilities on solid operational ground — not slide decks.</p>
+    <div class="hero-ctas fade-up">
+      <a href="mailto:blueprint@foundationaiadvisory.com?subject=Discovery%20Call%20Request&body=Hi%20FAA%20team%2C%0A%0AI%27m%20interested%20in%20a%20discovery%20call%20to%20explore%20AI%20readiness%20for%20our%20organization.%0A%0ACompany%3A%20%0ARole%3A%20%0ABrief%20context%3A%20" class="btn-primary">
+        Book a Discovery Call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#methodology" class="btn-secondary">See Our Approach</a>
+    </div>
+
+    <div class="entry-card fade-up">
+      <div class="entry-card-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2a7de1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        TYPICAL STARTING POINT
+      </div>
+      <h3>Enterprise AI Evaluation</h3>
+      <p>Every engagement begins here. A 1&ndash;2 week structured assessment across your entire operation, producing a prioritized AI roadmap your leadership team can act on immediately.</p>
+    </div>
+
+    <div class="metrics-strip fade-up">
+      <div class="metric">
+        <div class="metric-value">1&ndash;2 Wk</div>
+        <div class="metric-label">AI Evaluation</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">90-Day</div>
+        <div class="metric-label">Sprint Model</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">3-Pillar</div>
+        <div class="metric-label">Methodology</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">Zero Hype</div>
+        <div class="metric-label">All ROI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ AI EVALUATION ═══════ -->
+<section class="section eval-section" id="evaluation">
+  <div class="container">
+    <div class="eval-grid">
+      <div class="eval-left fade-up">
+        <div class="eval-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2a7de1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          WHERE EVERY ENGAGEMENT BEGINS
+        </div>
+        <h2>Enterprise AI Evaluation</h2>
+        <p>Before we recommend a single tool, platform, or workflow change, we assess your entire operation. Not just IT. Not just one department. Every area of your business where AI could create measurable value.</p>
+        <p>Over 1&ndash;2 focused weeks, our team maps your data landscape, operational processes, technology infrastructure, and organizational readiness. The result is a prioritized roadmap that leadership can act on immediately &mdash; not a 200-page report that gathers dust.</p>
+        <a href="mailto:blueprint@foundationaiadvisory.com?subject=Enterprise%20AI%20Evaluation%20Request&body=Hi%20FAA%20team%2C%0A%0AWe%27re%20interested%20in%20the%20Enterprise%20AI%20Evaluation%20for%20our%20organization.%0A%0ACompany%3A%20%0AIndustry%3A%20%0AKey%20areas%20of%20interest%3A%20" class="btn-blue">
+          Request an Evaluation
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="eval-cards fade-up">
+        <div class="eval-card">
+          <div class="eval-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+          </div>
+          <h4>Data Landscape</h4>
+          <p>Audit of structured and unstructured data assets, quality, accessibility, and governance readiness.</p>
+        </div>
+        <div class="eval-card">
+          <div class="eval-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h4>Process Mapping</h4>
+          <p>Identification of high-impact workflows where AI can reduce cost, accelerate speed, or improve accuracy.</p>
+        </div>
+        <div class="eval-card">
+          <div class="eval-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <h4>Technology Stack</h4>
+          <p>Review of existing infrastructure, integration points, and technical readiness for AI deployment.</p>
+        </div>
+        <div class="eval-card">
+          <div class="eval-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h4>Organizational Readiness</h4>
+          <p>Assessment of team capabilities, change management needs, and leadership alignment on AI objectives.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ METHODOLOGY ═══════ -->
+<section class="section" id="methodology">
+  <div class="container">
+    <div class="method-header fade-up">
+      <div class="method-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2a7de1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        OUR METHODOLOGY
+      </div>
+      <h2>Three Pillars. One Outcome:<br>AI That Delivers.</h2>
+      <p>Every successful AI deployment rests on three non-negotiable foundations. Skip one, and the entire initiative stalls. We build them in sequence.</p>
+    </div>
+
+    <div class="pillars fade-up">
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+        </div>
+        <div class="pillar-step">Step 01</div>
+        <h3>Data Curation</h3>
+        <p>AI is only as good as the data it learns from. We inventory, clean, structure, and govern your data assets so AI models have the quality inputs required to produce reliable outputs.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="pillar-step">Step 02</div>
+        <h3>Process Optimization</h3>
+        <p>Automating a broken process just breaks it faster. We map, streamline, and standardize your workflows before introducing AI &mdash; so the technology amplifies efficiency, not chaos.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+        </div>
+        <div class="pillar-step">Step 03</div>
+        <h3>AI Implementation</h3>
+        <p>With clean data and optimized processes in place, we deploy AI solutions purpose-built for your operation. Platform-agnostic. Vendor-neutral. Measured by business outcomes, not technology novelty.</p>
+      </div>
+    </div>
+
+    <div class="flagship fade-up">
+      <div class="flagship-label">FLAGSHIP ENGAGEMENT</div>
+      <h3>90-Day AI Advisory Sprint</h3>
+      <p>A compressed, high-impact engagement designed to take mid-market operators from assessment to deployed AI capability in 90 days.</p>
+      <div class="flagship-grid">
+        <div class="flagship-item">
+          <h4>Workflow Assessment</h4>
+          <p>Complete operational mapping with AI opportunity scoring across every department.</p>
+        </div>
+        <div class="flagship-item">
+          <h4>Data Readiness Plan</h4>
+          <p>Actionable roadmap to bring data assets to AI-ready state within existing infrastructure.</p>
+        </div>
+        <div class="flagship-item">
+          <h4>AI Architecture</h4>
+          <p>Technology blueprint specifying models, integrations, and deployment architecture.</p>
+        </div>
+        <div class="flagship-item">
+          <h4>KPI Framework</h4>
+          <p>Measurement system tying every AI initiative directly to business outcomes and ROI.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WHO WE SERVE ═══════ -->
+<section class="section serve-section" id="serve">
+  <div class="container">
+    <div class="serve-header fade-up">
+      <div class="method-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2a7de1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        WHO WE SERVE
+      </div>
+      <h2>Built for Operators.<br>Not Experiments.</h2>
+      <p>We work with mid-market companies running real operations where AI has to deliver measurable results to justify the investment.</p>
+    </div>
+
+    <div class="serve-grid fade-up">
+      <div class="serve-card">
+        <div class="serve-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V8l5-4 5 4v12"/><path d="M10 20v-4h0"/><path d="M15 20V12l5-2v10"/><rect x="8" y="10" width="4" height="3"/></svg>
+        </div>
+        <h3>Manufacturing</h3>
+        <p>Predictive maintenance, quality control automation, demand forecasting, and production line optimization. AI that reduces downtime and improves yield where margins are measured in basis points.</p>
+      </div>
+      <div class="serve-card">
+        <div class="serve-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><rect x="4" y="10" width="4" height="10"/><rect x="10" y="6" width="4" height="14"/><rect x="16" y="2" width="4" height="18"/></svg>
+        </div>
+        <h3>Construction</h3>
+        <p>Bid estimation accuracy, project timeline optimization, safety compliance monitoring, and resource allocation. AI that keeps projects on budget and crews on schedule.</p>
+      </div>
+      <div class="serve-card">
+        <div class="serve-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polyline points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Logistics</h3>
+        <p>Route optimization, warehouse automation, inventory forecasting, and supply chain visibility. AI that compresses delivery windows and eliminates inefficiency across the chain.</p>
+      </div>
+      <div class="serve-card">
+        <div class="serve-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+        </div>
+        <h3>Professional Services</h3>
+        <p>Document processing, client engagement automation, knowledge management, and resource planning. AI that frees billable professionals from administrative drag and accelerates delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PHILOSOPHY ═══════ -->
+<section class="section philosophy" id="philosophy">
+  <div class="container">
+    <div class="phil-grid">
+      <div class="phil-left fade-up">
+        <div class="phil-label">OUR PHILOSOPHY</div>
+        <h2>We Don't Sell AI.<br>We Build the Ground It Stands On.</h2>
+        <blockquote class="phil-quote">"The companies that win with AI aren't the ones who moved first &mdash; they're the ones who built on solid ground."</blockquote>
+        <p>Foundation AI Advisory is platform-agnostic and vendor-neutral. We don't resell tools, take referral fees, or push proprietary solutions. Our only incentive is your outcome. We recommend the right technology for the job &mdash; whether that's a frontier model, an open-source solution, or the realization that a well-designed spreadsheet solves the problem better than any AI system could.</p>
+        <a href="mailto:blueprint@foundationaiadvisory.com?subject=Discovery%20Call%20Request&body=Hi%20FAA%20team%2C%0A%0AI%27d%20like%20to%20learn%20more%20about%20your%20advisory%20approach.%0A%0ACompany%3A%20%0ARole%3A%20%0AKey%20challenges%3A%20" class="btn-blue" style="border:1.5px solid rgba(110,198,245,0.3); background:transparent;">
+          Start a Conversation
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="phil-stats fade-up">
+        <div class="phil-stat">
+          <div class="phil-stat-value">70%</div>
+          <div class="phil-stat-label">of enterprise AI projects fail to move past pilot stage. Foundation exists to put you in the other 30%.</div>
+        </div>
+        <div class="phil-stat">
+          <div class="phil-stat-value">3x</div>
+          <div class="phil-stat-label">higher ROI on AI investments when data curation and process optimization are completed before deployment.</div>
+        </div>
+        <div class="phil-stat">
+          <div class="phil-stat-value">90 Days</div>
+          <div class="phil-stat-label">from assessment to deployed, measurable AI capability through our structured sprint methodology.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="contact-inner fade-up">
+      <h2>Ready to build AI that actually works?</h2>
+      <p>Tell us about your operation. We'll respond within one business day with a clear next step &mdash; no sales pitch, no pressure.</p>
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Mitchell" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Work Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Acme Industries" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us briefly about your operation and what you're hoping AI can help with."></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-primary" style="padding:13px 36px; font-size:14.5px;">
+            Send Message
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
+      <p class="contact-note">Or reach us directly at <a href="mailto:blueprint@foundationaiadvisory.com">blueprint@foundationaiadvisory.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ftBarGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+            <linearGradient id="ftOrbitGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1b2d52"/><stop offset="50%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+          </defs>
+          <path d="M50 16 C38 16 28 20 22 28 C16 36 15 46 18 54 C20 60 24 65 30 68 C34 70 40 72 46 72 L50 72 L50 16Z" fill="#0f1e3a" opacity="0.92"/>
+          <path d="M58 66 C54 68 50 68 50 68 L50 26 C58 18 68 20 74 26 C80 32 82 42 80 50 C84 51 87 55 87 59 C87 64 83 67 79 67 L58 66Z" fill="url(#ftBarGrad)" opacity="0.18"/>
+          <circle cx="36" cy="30" r="3.5" fill="#6ec6f5"/><circle cx="28" cy="40" r="3" fill="#6ec6f5"/><circle cx="38" cy="48" r="3.2" fill="#6ec6f5"/><circle cx="30" cy="56" r="2.8" fill="#6ec6f5"/><circle cx="44" cy="36" r="2.5" fill="#6ec6f5"/><circle cx="42" cy="58" r="2.6" fill="#6ec6f5"/><circle cx="34" cy="66" r="2.4" fill="#6ec6f5"/>
+          <line x1="36" y1="30" x2="28" y2="40" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="36" y1="30" x2="44" y2="36" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="28" y1="40" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="44" y1="36" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="38" y1="48" x2="30" y2="56" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="38" y1="48" x2="42" y2="58" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="30" y1="56" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="42" y1="58" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+          <rect x="56" y="52" width="5" height="16" rx="1.2" fill="url(#ftBarGrad)" opacity="0.65"/><rect x="63" y="44" width="5" height="24" rx="1.2" fill="url(#ftBarGrad)" opacity="0.78"/><rect x="70" y="36" width="5" height="32" rx="1.2" fill="url(#ftBarGrad)" opacity="0.9"/><rect x="77" y="28" width="5" height="40" rx="1.2" fill="url(#ftBarGrad)"/>
+          <ellipse cx="50" cy="52" rx="46" ry="16" stroke="url(#ftOrbitGrad)" stroke-width="2.8" fill="none" transform="rotate(-8 50 52)"/>
+          <circle cx="8" cy="58" r="2.5" fill="#0f1e3a"/><circle cx="18" cy="65" r="2" fill="#1b2d52"/><circle cx="30" cy="68" r="2.2" fill="#2a7de1"/><circle cx="70" cy="68" r="2.2" fill="#2a7de1"/><circle cx="82" cy="65" r="2" fill="#1b2d52"/><circle cx="92" cy="58" r="2.5" fill="#0f1e3a"/>
+        </svg>
+        <div class="footer-wordmark">
+          <span class="footer-wordmark-top">FOUNDATION</span>
+          <span class="footer-wordmark-bottom">&mdash; AI ADVISORY &mdash;</span>
+        </div>
+      </div>
+      <span class="footer-tagline">Business First. AI Applied.</span>
+      <div class="footer-links">
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:blueprint@foundationaiadvisory.com" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll shadow
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// Fade-up on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Contact form → mailto
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const fn = document.getElementById('firstName').value.trim();
+  const ln = document.getElementById('lastName').value.trim();
+  const em = document.getElementById('email').value.trim();
+  const co = document.getElementById('company').value.trim();
+  const msg = document.getElementById('message').value.trim();
+
+  const subject = encodeURIComponent('AI Advisory Inquiry from ' + fn + ' ' + ln + ' at ' + co);
+  const body = encodeURIComponent(
+    'Name: ' + fn + ' ' + ln + '\n' +
+    'Email: ' + em + '\n' +
+    'Company: ' + co + '\n\n' +
+    'Message:\n' + msg
+  );
+
+  window.location.href = 'mailto:blueprint@foundationaiadvisory.com?subject=' + subject + '&body=' + body;
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
