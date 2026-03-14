@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Academy — Foundation AI Advisory</title>
+<meta name="description" content="Foundation AI Academy: Structured learning paths, executive workshops, and certification programs that build real AI literacy across your organization.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1b2d52;
+  --navy-deep: #0f1e3a;
+  --blue: #2a7de1;
+  --blue-light: #3a8ff0;
+  --sky: #6ec6f5;
+  --white: #ffffff;
+  --off-white: #f7f9fc;
+  --text-dark: #0f1e3a;
+  --text-mid: #3a4d6b;
+  --text-muted: #6b7e9f;
+  --border: #dce6f5;
+  --section-pad: clamp(64px, 8vw, 96px);
+  --h-pad: 6%;
+  --max-w: 1100px;
+  --radius: 13px;
+  --radius-sm: 10px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.65;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--h-pad); width: 100%; }
+.section { padding: var(--section-pad) 0; }
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 var(--h-pad); height: 72px;
+  display: flex; align-items: center;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  transition: box-shadow 0.3s ease;
+}
+.nav.scrolled { box-shadow: 0 1px 12px rgba(15,30,58,0.08); }
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto; width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo svg { flex-shrink: 0; }
+.nav-wordmark { display: flex; flex-direction: column; line-height: 1.1; }
+.nav-wordmark-top { font-size: 15px; font-weight: 800; letter-spacing: 0.04em; color: var(--navy-deep); }
+.nav-wordmark-bottom { font-size: 8.5px; font-weight: 600; letter-spacing: 0.22em; color: var(--blue); text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 36px); }
+.nav-link { font-size: 13.5px; font-weight: 500; color: var(--text-mid); letter-spacing: 0.01em; transition: color 0.2s; }
+.nav-link:hover { color: var(--blue); }
+.nav-link.active { color: var(--blue); font-weight: 600; }
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; background: var(--navy-deep); color: var(--white);
+  font-size: 13.5px; font-weight: 600; border-radius: 8px; letter-spacing: 0.01em;
+  transition: transform 0.2s, box-shadow 0.25s, background 0.2s;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(15,30,58,0.18); background: #162847; }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; background: transparent; color: var(--navy-deep);
+  font-size: 13.5px; font-weight: 600; border-radius: 8px;
+  border: 1.5px solid var(--border); letter-spacing: 0.01em;
+  transition: transform 0.2s, border-color 0.25s, box-shadow 0.25s;
+}
+.btn-secondary:hover { transform: translateY(-1px); border-color: var(--blue); box-shadow: 0 4px 16px rgba(42,125,225,0.10); }
+
+.btn-blue {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; background: var(--blue); color: var(--white);
+  font-size: 14px; font-weight: 600; border-radius: 8px; letter-spacing: 0.01em;
+  transition: transform 0.2s, box-shadow 0.25s, background 0.2s;
+}
+.btn-blue:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(42,125,225,0.22); background: #2472d0; }
+
+.btn-outline-sky {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; background: transparent; color: var(--white);
+  font-size: 14px; font-weight: 600; border-radius: 8px;
+  border: 1.5px solid rgba(110,198,245,0.35); letter-spacing: 0.01em;
+  transition: transform 0.2s, border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.btn-outline-sky:hover { transform: translateY(-1px); border-color: var(--sky); background: rgba(110,198,245,0.08); }
+
+.arrow-icon { width: 14px; height: 14px; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative; padding: 140px 0 80px; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 70% 30%, rgba(42,125,225,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 70%, rgba(110,198,245,0.05) 0%, transparent 55%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(220,230,245,0.30) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220,230,245,0.30) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 40%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 40%, black 20%, transparent 70%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 680px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px; background: var(--off-white); border: 1px solid var(--border);
+  border-radius: 100px; font-size: 12.5px; font-weight: 600;
+  color: var(--text-mid); letter-spacing: 0.02em; margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--blue);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+.hero h1 {
+  font-size: clamp(36px, 5.5vw, 56px); font-weight: 900;
+  letter-spacing: -0.03em; line-height: 1.08; color: var(--navy-deep); margin-bottom: 20px;
+}
+.hero h1 span { color: var(--blue); }
+.hero-sub {
+  font-size: clamp(16px, 2vw, 18px); font-weight: 400; color: var(--text-mid);
+  line-height: 1.65; max-width: 560px; margin-bottom: 36px;
+}
+.hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+
+/* Stats strip */
+.stats-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); overflow: hidden; max-width: 520px;
+}
+.stat-item { background: var(--white); padding: 20px 18px; text-align: center; }
+.stat-value { font-size: clamp(16px, 2vw, 19px); font-weight: 800; color: var(--navy-deep); letter-spacing: -0.01em; margin-bottom: 3px; }
+.stat-label { font-size: 11.5px; font-weight: 500; color: var(--text-muted); }
+
+/* ─── LEARNING PATHS ─── */
+.paths-section { background: var(--off-white); }
+.section-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
+}
+.section-label svg { width: 14px; height: 14px; }
+.section-header { margin-bottom: 48px; }
+.section-header h2 {
+  font-size: clamp(28px, 4vw, 38px); font-weight: 800;
+  letter-spacing: -0.025em; line-height: 1.12; color: var(--navy-deep); margin-bottom: 14px;
+}
+.section-header p { font-size: 15.5px; color: var(--text-mid); max-width: 560px; line-height: 1.65; }
+.section-header.centered { text-align: center; }
+.section-header.centered p { margin: 0 auto; }
+
+.paths-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.path-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 32px 26px; position: relative;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.3s;
+}
+.path-card:hover { transform: translateY(-3px); border-color: var(--blue); box-shadow: 0 8px 24px rgba(42,125,225,0.08); }
+.path-tier {
+  display: inline-block; padding: 4px 10px; border-radius: 5px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.path-tier.executive { background: rgba(42,125,225,0.08); color: var(--blue); }
+.path-tier.operational { background: rgba(27,45,82,0.07); color: var(--navy); }
+.path-tier.technical { background: rgba(110,198,245,0.12); color: #1a6fb5; }
+.path-icon {
+  width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+  background: var(--off-white); border-radius: 10px; margin-bottom: 18px;
+}
+.path-icon svg { width: 22px; height: 22px; stroke: var(--blue); }
+.path-card h3 { font-size: 18px; font-weight: 700; color: var(--navy-deep); margin-bottom: 10px; letter-spacing: -0.01em; }
+.path-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; margin-bottom: 18px; }
+.path-meta { display: flex; flex-wrap: wrap; gap: 14px; }
+.path-meta-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+}
+.path-meta-item svg { width: 13px; height: 13px; stroke: var(--text-muted); flex-shrink: 0; }
+
+/* ─── CURRICULUM ─── */
+.curriculum-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
+}
+.curriculum-left h2 {
+  font-size: clamp(28px, 4vw, 38px); font-weight: 800;
+  letter-spacing: -0.025em; line-height: 1.12; color: var(--navy-deep); margin-bottom: 18px;
+}
+.curriculum-left > p { font-size: 15px; color: var(--text-mid); line-height: 1.7; margin-bottom: 28px; }
+
+.module-list { display: flex; flex-direction: column; gap: 12px; }
+.module-item {
+  display: flex; gap: 16px; padding: 20px; background: var(--off-white);
+  border: 1.5px solid transparent; border-radius: var(--radius-sm);
+  transition: border-color 0.25s, background 0.25s;
+}
+.module-item:hover { border-color: var(--border); background: var(--white); }
+.module-num {
+  flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  background: var(--white); border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 13px; font-weight: 800; color: var(--blue);
+}
+.module-item:hover .module-num { border-color: var(--blue); background: rgba(42,125,225,0.04); }
+.module-content h4 { font-size: 14.5px; font-weight: 700; color: var(--navy-deep); margin-bottom: 4px; }
+.module-content p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+.curriculum-right { display: flex; flex-direction: column; gap: 14px; }
+.cert-card {
+  background: var(--navy-deep); border-radius: var(--radius); padding: 32px 28px; color: var(--white);
+}
+.cert-card-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--sky); margin-bottom: 14px;
+}
+.cert-card h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 10px; }
+.cert-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 20px; }
+.cert-features { display: flex; flex-direction: column; gap: 10px; }
+.cert-feature {
+  display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: rgba(255,255,255,0.75);
+}
+.cert-feature svg { width: 16px; height: 16px; stroke: var(--sky); flex-shrink: 0; margin-top: 2px; }
+
+.format-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  transition: border-color 0.25s, box-shadow 0.3s;
+}
+.format-card:hover { border-color: var(--blue); box-shadow: 0 6px 20px rgba(42,125,225,0.06); }
+.format-card h4 { font-size: 15px; font-weight: 700; color: var(--navy-deep); margin-bottom: 8px; }
+.format-card p { font-size: 13.5px; color: var(--text-mid); line-height: 1.6; }
+
+/* ─── TOPICS GRID ─── */
+.topics-section { background: var(--off-white); }
+.topics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.topic-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 24px 20px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.3s;
+}
+.topic-card:hover { transform: translateY(-2px); border-color: var(--blue); box-shadow: 0 6px 20px rgba(42,125,225,0.07); }
+.topic-icon {
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  background: var(--off-white); border-radius: 9px; margin-bottom: 14px;
+}
+.topic-icon svg { width: 20px; height: 20px; stroke: var(--blue); }
+.topic-card h4 { font-size: 14px; font-weight: 700; color: var(--navy-deep); margin-bottom: 6px; }
+.topic-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
+
+/* ─── PHILOSOPHY BANNER (dark) ─── */
+.academy-philosophy {
+  background: var(--navy-deep); color: var(--white);
+}
+.phil-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+}
+.phil-inner h2 {
+  font-size: clamp(26px, 3.5vw, 34px); font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 18px;
+}
+.phil-inner > div > p {
+  font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 24px;
+}
+.phil-quote {
+  border-left: 3px solid var(--sky); padding-left: 20px; margin-bottom: 24px;
+  font-size: 16px; font-weight: 500; font-style: italic;
+  color: rgba(255,255,255,0.85); line-height: 1.6;
+}
+.outcome-cards { display: flex; flex-direction: column; gap: 14px; }
+.outcome-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm); padding: 22px 24px;
+  backdrop-filter: blur(4px); transition: background 0.25s, border-color 0.25s;
+}
+.outcome-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(110,198,245,0.3); }
+.outcome-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+.outcome-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+/* ─── CTA SECTION ─── */
+.cta-section { background: var(--off-white); }
+.cta-inner {
+  max-width: 600px; margin: 0 auto; text-align: center;
+}
+.cta-inner h2 {
+  font-size: clamp(26px, 4vw, 36px); font-weight: 800;
+  letter-spacing: -0.025em; color: var(--navy-deep); margin-bottom: 14px;
+}
+.cta-inner > p { font-size: 15.5px; color: var(--text-mid); margin-bottom: 32px; line-height: 1.65; }
+.cta-buttons { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.cta-note { margin-top: 24px; font-size: 13px; color: var(--text-muted); }
+.cta-note a { color: var(--blue); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ─── FOOTER ─── */
+.footer { padding: 40px 0; border-top: 1px solid var(--border); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.footer-logo { display: flex; align-items: center; gap: 8px; }
+.footer-wordmark { display: flex; flex-direction: column; line-height: 1.1; }
+.footer-wordmark-top { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; color: var(--navy-deep); }
+.footer-wordmark-bottom { font-size: 7.5px; font-weight: 600; letter-spacing: 0.22em; color: var(--blue); }
+.footer-tagline { font-size: 13px; color: var(--text-muted); }
+.footer-links { display: flex; align-items: center; gap: 20px; }
+.footer-link { font-size: 13px; font-weight: 500; color: var(--text-mid); transition: color 0.2s; display: flex; align-items: center; gap: 5px; }
+.footer-link:hover { color: var(--blue); }
+.footer-link svg { width: 16px; height: 16px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .paths-grid { grid-template-columns: 1fr 1fr; }
+  .curriculum-grid { grid-template-columns: 1fr; gap: 40px; }
+  .topics-grid { grid-template-columns: 1fr 1fr; }
+  .phil-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 760px) {
+  .paths-grid { grid-template-columns: 1fr; }
+  .stats-strip { grid-template-columns: 1fr; }
+  .topics-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links-text { display: none; }
+  .hero h1 { font-size: clamp(30px, 8vw, 40px); }
+  .topics-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-tagline { order: 3; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="navBarGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+          <linearGradient id="navOrbitGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1b2d52"/><stop offset="50%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+        </defs>
+        <path d="M50 16 C38 16 28 20 22 28 C16 36 15 46 18 54 C20 60 24 65 30 68 C34 70 40 72 46 72 L50 72 L50 16Z" fill="#0f1e3a" opacity="0.92"/>
+        <path d="M50 16 C62 16 72 20 78 28 C84 36 85 44 83 52 C86 52 90 56 90 61 C90 66 86 70 81 70 L50 70 L50 16Z" fill="#2a7de1" opacity="0.15"/>
+        <path d="M58 66 C54 68 50 68 50 68 L50 26 C58 18 68 20 74 26 C80 32 82 42 80 50 C84 51 87 55 87 59 C87 64 83 67 79 67 L58 66Z" fill="url(#navBarGrad)" opacity="0.18"/>
+        <circle cx="36" cy="30" r="3.5" fill="#6ec6f5"/><circle cx="28" cy="40" r="3" fill="#6ec6f5"/><circle cx="38" cy="48" r="3.2" fill="#6ec6f5"/><circle cx="30" cy="56" r="2.8" fill="#6ec6f5"/><circle cx="44" cy="36" r="2.5" fill="#6ec6f5"/><circle cx="42" cy="58" r="2.6" fill="#6ec6f5"/><circle cx="34" cy="66" r="2.4" fill="#6ec6f5"/>
+        <line x1="36" y1="30" x2="28" y2="40" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="36" y1="30" x2="44" y2="36" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="28" y1="40" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="44" y1="36" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="38" y1="48" x2="30" y2="56" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="38" y1="48" x2="42" y2="58" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="30" y1="56" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="42" y1="58" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="28" y1="40" x2="30" y2="56" stroke="#6ec6f5" stroke-width="1" opacity="0.35"/>
+        <rect x="56" y="52" width="5" height="16" rx="1.2" fill="url(#navBarGrad)" opacity="0.65"/><rect x="63" y="44" width="5" height="24" rx="1.2" fill="url(#navBarGrad)" opacity="0.78"/><rect x="70" y="36" width="5" height="32" rx="1.2" fill="url(#navBarGrad)" opacity="0.9"/><rect x="77" y="28" width="5" height="40" rx="1.2" fill="url(#navBarGrad)"/>
+        <ellipse cx="50" cy="52" rx="46" ry="16" stroke="url(#navOrbitGrad)" stroke-width="2.8" fill="none" transform="rotate(-8 50 52)"/>
+        <circle cx="8" cy="58" r="2.5" fill="#0f1e3a"/><circle cx="18" cy="65" r="2" fill="#1b2d52"/><circle cx="30" cy="68" r="2.2" fill="#2a7de1"/><circle cx="70" cy="68" r="2.2" fill="#2a7de1"/><circle cx="82" cy="65" r="2" fill="#1b2d52"/><circle cx="92" cy="58" r="2.5" fill="#0f1e3a"/>
+      </svg>
+      <div class="nav-wordmark">
+        <span class="nav-wordmark-top">FOUNDATION</span>
+        <span class="nav-wordmark-bottom">&mdash; AI ADVISORY &mdash;</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link nav-links-text">Home</a>
+      <a href="index.html#methodology" class="nav-link nav-links-text">Methodology</a>
+      <a href="academy.html" class="nav-link nav-links-text active">AI Academy</a>
+      <a href="mailto:blueprint@foundationaiadvisory.com?subject=AI%20Academy%20Inquiry&body=Hi%20FAA%20team%2C%0A%0AI%27m%20interested%20in%20AI%20Academy%20training%20for%20our%20organization.%0A%0ACompany%3A%20%0ARole%3A%20%0ATeam%20size%3A%20" class="btn-primary">Enroll Your Team</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        <span class="hero-badge-dot"></span>
+        Foundation AI Academy
+      </div>
+      <h1 class="fade-up">Build AI Literacy<br>That <span>Compounds.</span></h1>
+      <p class="hero-sub fade-up">Structured learning paths that take your entire organization from AI-curious to AI-capable. Not one-off webinars. Real fluency that drives real decisions.</p>
+      <div class="hero-ctas fade-up">
+        <a href="mailto:blueprint@foundationaiadvisory.com?subject=AI%20Academy%20Enrollment&body=Hi%20FAA%20team%2C%0A%0AWe%27d%20like%20to%20explore%20AI%20Academy%20enrollment%20for%20our%20team.%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0AAreas%20of%20interest%3A%20" class="btn-primary">
+          Explore Programs
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#paths" class="btn-secondary">See Learning Paths</a>
+      </div>
+      <div class="stats-strip fade-up">
+        <div class="stat-item">
+          <div class="stat-value">3 Tracks</div>
+          <div class="stat-label">By Role</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">8 Modules</div>
+          <div class="stat-label">Core Curriculum</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">Certified</div>
+          <div class="stat-label">Completion Path</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ LEARNING PATHS ═══════ -->
+<section class="section paths-section" id="paths">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2a7de1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        LEARNING PATHS
+      </div>
+      <h2>Three Tracks. One Aligned Organization.</h2>
+      <p>Every role in your company needs a different depth of AI understanding. We built three distinct tracks so leadership, operations, and technical teams all reach fluency at the level that matters for their decisions.</p>
+    </div>
+
+    <div class="paths-grid fade-up">
+      <div class="path-card">
+        <span class="path-tier executive">Executive Track</span>
+        <div class="path-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>AI Strategy for Leaders</h3>
+        <p>Built for C-suite and senior leadership. Covers AI opportunity assessment, investment frameworks, risk management, and how to evaluate vendors without needing to understand the math. Outcome: leaders who ask the right questions and fund the right initiatives.</p>
+        <div class="path-meta">
+          <span class="path-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            4 sessions
+          </span>
+          <span class="path-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            2 weeks
+          </span>
+        </div>
+      </div>
+
+      <div class="path-card">
+        <span class="path-tier operational">Operational Track</span>
+        <div class="path-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>AI for Operations &amp; Managers</h3>
+        <p>Designed for department heads and process owners. Covers identifying automation candidates, managing AI-augmented workflows, data quality ownership, and change management. Outcome: managers who can scope, champion, and sustain AI within their teams.</p>
+        <div class="path-meta">
+          <span class="path-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            6 sessions
+          </span>
+          <span class="path-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            3 weeks
+          </span>
+        </div>
+      </div>
+
+      <div class="path-card">
+        <span class="path-tier technical">Technical Track</span>
+        <div class="path-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+        </div>
+        <h3>AI Implementation Practicum</h3>
+        <p>For IT leads, data teams, and technical staff. Covers model selection, data pipeline architecture, prompt engineering, integration patterns, testing, and deployment. Outcome: builders who can ship production AI systems with confidence.</p>
+        <div class="path-meta">
+          <span class="path-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            8 sessions
+          </span>
+          <span class="path-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            4 weeks
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CURRICULUM ═══════ -->
+<section class="section" id="curriculum">
+  <div class="container">
+    <div class="curriculum-grid">
+      <div class="curriculum-left fade-up">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2a7de1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          CORE CURRICULUM
+        </div>
+        <h2>Eight Modules That Build on Each Other.</h2>
+        <p>Every module is grounded in your industry, your data, and your actual workflows. No generic case studies from Fortune 10 companies that don't translate to mid-market reality.</p>
+
+        <div class="module-list">
+          <div class="module-item">
+            <div class="module-num">01</div>
+            <div class="module-content">
+              <h4>AI Landscape &amp; Business Context</h4>
+              <p>What AI actually is, what it isn't, and where it creates value in operations like yours.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">02</div>
+            <div class="module-content">
+              <h4>Data Foundations</h4>
+              <p>How to assess, clean, and structure the data assets that determine AI success or failure.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">03</div>
+            <div class="module-content">
+              <h4>Process Mapping for AI</h4>
+              <p>Identifying which workflows benefit from AI and which need to be fixed first.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">04</div>
+            <div class="module-content">
+              <h4>AI Tools &amp; Platform Evaluation</h4>
+              <p>A vendor-neutral framework for assessing tools, models, and platforms against your requirements.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">05</div>
+            <div class="module-content">
+              <h4>Prompt Engineering &amp; AI Interfaces</h4>
+              <p>Practical techniques for getting reliable, repeatable results from AI systems.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">06</div>
+            <div class="module-content">
+              <h4>Risk, Ethics &amp; Governance</h4>
+              <p>Building responsible AI practices, compliance frameworks, and decision audit trails.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">07</div>
+            <div class="module-content">
+              <h4>Implementation &amp; Integration</h4>
+              <p>Architecture patterns, deployment strategies, and integration with existing systems.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">08</div>
+            <div class="module-content">
+              <h4>Measurement &amp; Continuous Improvement</h4>
+              <p>KPI frameworks that tie AI performance directly to business outcomes and ROI.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="curriculum-right fade-up">
+        <div class="cert-card">
+          <div class="cert-card-label">CERTIFICATION</div>
+          <h3>FAA AI Readiness Certificate</h3>
+          <p>Complete your track's required modules and a capstone assessment to earn a Foundation AI Advisory certification recognized by your peers and leadership.</p>
+          <div class="cert-features">
+            <div class="cert-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Track-specific capstone project using your company's real data
+            </div>
+            <div class="cert-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Peer-reviewed presentation to leadership stakeholders
+            </div>
+            <div class="cert-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Shareable credential with verification link
+            </div>
+            <div class="cert-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Access to quarterly alumni briefings on emerging AI capabilities
+            </div>
+          </div>
+        </div>
+
+        <div class="format-card">
+          <h4>Live Cohort Format</h4>
+          <p>Sessions run as live, instructor-led workshops with your actual team. Not pre-recorded. Not self-paced. We believe learning sticks when it's collaborative, contextual, and immediately applicable to your work.</p>
+        </div>
+
+        <div class="format-card">
+          <h4>Custom to Your Operation</h4>
+          <p>Every module is adapted to your industry, your data, and your actual workflows. Manufacturing teams work through manufacturing examples. Construction teams work through construction examples. No one learns from irrelevant case studies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TOPICS DEEP DIVE ═══════ -->
+<section class="section topics-section" id="topics">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2a7de1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        TOPICS COVERED
+      </div>
+      <h2>Practical Knowledge.<br>Not Academic Theory.</h2>
+      <p>Every topic is selected because it directly impacts how your team evaluates, builds, or manages AI in a real operational environment.</p>
+    </div>
+
+    <div class="topics-grid fade-up">
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h4>Prompt Engineering</h4>
+        <p>Design prompts that produce reliable, repeatable outputs across use cases.</p>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+        </div>
+        <h4>Data Quality</h4>
+        <p>Assess, clean, and govern the data that determines AI success.</p>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>AI Governance</h4>
+        <p>Build compliance frameworks, audit trails, and responsible AI practices.</p>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h4>ROI Measurement</h4>
+        <p>Frameworks to quantify AI impact and justify continued investment.</p>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </div>
+        <h4>Workflow Automation</h4>
+        <p>Identify, scope, and automate the right processes with the right tools.</p>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h4>Change Management</h4>
+        <p>Lead teams through AI adoption without resistance or disruption.</p>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h4>Integration Patterns</h4>
+        <p>Connect AI systems to your existing tech stack without rip-and-replace.</p>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+        </div>
+        <h4>Vendor Evaluation</h4>
+        <p>Assess AI platforms and tools objectively, without vendor influence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PHILOSOPHY BANNER ═══════ -->
+<section class="section academy-philosophy">
+  <div class="container">
+    <div class="phil-inner">
+      <div class="fade-up">
+        <div class="section-label" style="color: var(--sky);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          WHY AN ACADEMY
+        </div>
+        <h2>AI Tools Change Every Quarter. AI Literacy Lasts.</h2>
+        <blockquote class="phil-quote">"The companies that get lasting value from AI aren't the ones with the best tools. They're the ones with the most capable people."</blockquote>
+        <p>Most AI training is a one-day workshop that evaporates within a week. Foundation AI Academy builds durable knowledge through structured progression, hands-on practice with your actual data, and a certification path that signals real competence to your organization.</p>
+        <a href="mailto:blueprint@foundationaiadvisory.com?subject=AI%20Academy%20Inquiry&body=Hi%20FAA%20team%2C%0A%0AI%27d%20like%20to%20discuss%20AI%20Academy%20training%20for%20our%20organization.%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0AKey%20goals%3A%20" class="btn-outline-sky">
+          Discuss Training for Your Team
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="outcome-cards fade-up">
+        <div class="outcome-card">
+          <h4>Shared Vocabulary</h4>
+          <p>When leadership, operations, and technical teams speak the same AI language, initiatives move from proposal to production without translation loss.</p>
+        </div>
+        <div class="outcome-card">
+          <h4>Internal Champions</h4>
+          <p>Certified team members become AI advocates within their departments, reducing reliance on external consultants for every new initiative.</p>
+        </div>
+        <div class="outcome-card">
+          <h4>Faster Evaluation Cycles</h4>
+          <p>Teams that understand AI fundamentals can assess new tools and opportunities in days instead of months, keeping pace with a technology that moves fast.</p>
+        </div>
+        <div class="outcome-card">
+          <h4>Lower Failure Rates</h4>
+          <p>Organizations with structured AI literacy programs see significantly fewer failed implementations because teams catch issues before they become expensive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <h2>Ready to build an AI-literate organization?</h2>
+      <p>Tell us about your team and your goals. We'll design a training program scoped to your industry, your data, and the specific AI capabilities your people need to develop.</p>
+      <div class="cta-buttons">
+        <a href="mailto:blueprint@foundationaiadvisory.com?subject=AI%20Academy%20Enrollment%20Inquiry&body=Hi%20FAA%20team%2C%0A%0AWe%27re%20interested%20in%20enrolling%20our%20team%20in%20the%20AI%20Academy.%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ATracks%20of%20interest%3A%20%0ATimeline%3A%20" class="btn-primary" style="padding: 13px 32px; font-size: 14.5px;">
+          Enroll Your Team
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="index.html#contact" class="btn-secondary" style="padding: 13px 32px; font-size: 14.5px;">Book a Call First</a>
+      </div>
+      <p class="cta-note">Or reach us directly at <a href="mailto:blueprint@foundationaiadvisory.com">blueprint@foundationaiadvisory.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ftBarGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+            <linearGradient id="ftOrbitGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1b2d52"/><stop offset="50%" stop-color="#2a7de1"/><stop offset="100%" stop-color="#6ec6f5"/></linearGradient>
+          </defs>
+          <path d="M50 16 C38 16 28 20 22 28 C16 36 15 46 18 54 C20 60 24 65 30 68 C34 70 40 72 46 72 L50 72 L50 16Z" fill="#0f1e3a" opacity="0.92"/>
+          <path d="M58 66 C54 68 50 68 50 68 L50 26 C58 18 68 20 74 26 C80 32 82 42 80 50 C84 51 87 55 87 59 C87 64 83 67 79 67 L58 66Z" fill="url(#ftBarGrad)" opacity="0.18"/>
+          <circle cx="36" cy="30" r="3.5" fill="#6ec6f5"/><circle cx="28" cy="40" r="3" fill="#6ec6f5"/><circle cx="38" cy="48" r="3.2" fill="#6ec6f5"/><circle cx="30" cy="56" r="2.8" fill="#6ec6f5"/><circle cx="44" cy="36" r="2.5" fill="#6ec6f5"/><circle cx="42" cy="58" r="2.6" fill="#6ec6f5"/><circle cx="34" cy="66" r="2.4" fill="#6ec6f5"/>
+          <line x1="36" y1="30" x2="28" y2="40" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="36" y1="30" x2="44" y2="36" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="28" y1="40" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="44" y1="36" x2="38" y2="48" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="38" y1="48" x2="30" y2="56" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="38" y1="48" x2="42" y2="58" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="30" y1="56" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/><line x1="42" y1="58" x2="34" y2="66" stroke="#6ec6f5" stroke-width="1.2" opacity="0.6"/>
+          <rect x="56" y="52" width="5" height="16" rx="1.2" fill="url(#ftBarGrad)" opacity="0.65"/><rect x="63" y="44" width="5" height="24" rx="1.2" fill="url(#ftBarGrad)" opacity="0.78"/><rect x="70" y="36" width="5" height="32" rx="1.2" fill="url(#ftBarGrad)" opacity="0.9"/><rect x="77" y="28" width="5" height="40" rx="1.2" fill="url(#ftBarGrad)"/>
+          <ellipse cx="50" cy="52" rx="46" ry="16" stroke="url(#ftOrbitGrad)" stroke-width="2.8" fill="none" transform="rotate(-8 50 52)"/>
+          <circle cx="8" cy="58" r="2.5" fill="#0f1e3a"/><circle cx="18" cy="65" r="2" fill="#1b2d52"/><circle cx="30" cy="68" r="2.2" fill="#2a7de1"/><circle cx="70" cy="68" r="2.2" fill="#2a7de1"/><circle cx="82" cy="65" r="2" fill="#1b2d52"/><circle cx="92" cy="58" r="2.5" fill="#0f1e3a"/>
+        </svg>
+        <div class="footer-wordmark">
+          <span class="footer-wordmark-top">FOUNDATION</span>
+          <span class="footer-wordmark-bottom">&mdash; AI ADVISORY &mdash;</span>
+        </div>
+      </div>
+      <span class="footer-tagline">Business First. AI Applied.</span>
+      <div class="footer-links">
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:blueprint@foundationaiadvisory.com" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
